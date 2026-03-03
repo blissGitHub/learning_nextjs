@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Corinthia } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { ThemeProvider } from "@/context/theme-provider";
+import { ModeToggle } from "@/components/ModeToggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,17 +30,40 @@ export const metadata: Metadata = {
   },
 };
 
+// export default function RootLayout({ children }: RootLayoutProps) {
+//   return (
+//     <>
+//       <html lang="en" suppressHydrationWarning>
+//         <head />
+//         <body>
+//           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+//             <ModeToggle />
+//             {children}
+//           </ThemeProvider>
+//         </body>
+//       </html>
+//     </>
+//   );
+// }
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head></head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${corinthia.variable} antialiased`}>
         <Navbar />
-        {children}
+
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ModeToggle />
+
+          {children}
+        </ThemeProvider>
       </body>
+
       {/* <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body> */}
 
       {/* <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body> */}

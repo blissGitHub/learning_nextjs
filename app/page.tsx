@@ -1,8 +1,13 @@
+import Link from "next/link";
 import React from "react";
 
 const Home = () => {
   return (
     <div>
+      <main>
+        <Link href="/projects/list">See Projects</Link>
+        <h1>Home</h1>
+      </main>
       <h1 className="font-geist-mono text-light-500 bg-sky-700 px-4 py-2 hover:bg-sky-800 sm:px-8 sm:py-3">
         Welcome to Next.js 👋 Geist Mono Font
       </h1>

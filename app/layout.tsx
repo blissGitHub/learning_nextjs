@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Corinthia } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+
 import { ThemeProvider } from "@/context/theme-provider";
 import { ModeToggle } from "@/components/ModeToggle";
+import Navbar from "@/components/navigation/navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,11 +56,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head></head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${corinthia.variable} antialiased`}>
-        <Navbar />
-
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <ModeToggle />
-
+          <Navbar />
           {children}
         </ThemeProvider>
       </body>

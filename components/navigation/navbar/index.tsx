@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ModeToggle } from "@/components/ModeToggle";
 
 const Navbar = () => {
   return (
@@ -14,7 +15,10 @@ const Navbar = () => {
       </Link>
 
       <p>Global Search</p>
-      <div className="flex-between gap-5"> Theme</div>
+      <div className="flex-between gap-5">
+        {" "}
+        <ModeToggle />{" "}
+      </div>
     </nav>
   );
 };

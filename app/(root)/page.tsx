@@ -1,7 +1,15 @@
+import { auth, signOut } from "@/auth";
+import { Button } from "@/components/ui/button";
+import ROUTES from "@/constants/routes";
+
 import Link from "next/link";
 import React from "react";
 
-const Home = () => {
+const Home = async () => {
+  const session = await auth();
+
+  console.log(session);
+
   return (
     <div>
       <main>
@@ -18,6 +26,17 @@ const Home = () => {
       <h1 className="font-corinthia bg-sky-700 px-4 py-2 text-3xl font-black text-black hover:bg-sky-800 sm:px-8 sm:py-3">
         Welcome to Next.js 👋 Corinthia Font
       </h1>
+
+      <form
+        className="px-10 pt-[100px]"
+        action={async (params: type) => {
+          "use server";
+
+          await signOut({ redirectTo: ROUTES.SIGN_IN });
+        }}
+      >
+        <Button type="submit">Log out</Button>
+      </form>
     </div>
   );
 };

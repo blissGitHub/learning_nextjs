@@ -4,7 +4,9 @@ import "./globals.css";
 
 import { ThemeProvider } from "@/context/theme-provider";
 import { ModeToggle } from "@/components/ModeToggle";
-import Navbar from "@/components/navigation/navbar";
+import { Toaster } from "sonner";
+import { getSession, SessionProvider } from "next-auth/react";
+import { auth } from "@/auth";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,21 +49,26 @@ export const metadata: Metadata = {
 //   );
 // }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+
   return (
     <html lang="en" suppressHydrationWarning>
-      <head></head>
-      <body className={`${geistSans.variable} ${geistMono.variable} ${corinthia.variable} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <ModeToggle />
-          <Navbar />
-          {children}
-        </ThemeProvider>
-      </body>
+      <SessionProvider session={session}>
+        <head></head>
+        <body className={`${geistSans.variable} ${geistMono.variable} ${corinthia.variable} antialiased`}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <Toaster position="top-center" />
+            <ModeToggle />
+
+            {children}
+          </ThemeProvider>
+        </body>
+      </SessionProvider>
 
       {/* <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body> */}
 

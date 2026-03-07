@@ -5,6 +5,7 @@
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
+/* @custom-variant dark (&:where(.dark, .dark *)); */
 
 @theme {
   --color-primary-100: #fff1e6;
@@ -564,4 +565,12 @@ code {
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+@utility bg-auth-dark {
+  background-image: var(--background-image-auth-dark);
+}
+
+@utility bg-auth-light {
+  background-image: var(--background-image-auth-light);
 }
